@@ -1,0 +1,116 @@
+{
+    "numero_caja": 23,
+    "compras": 
+    [
+        [
+            {
+                "nombre": "agua",
+                "cantidad": 2 ,
+                "precio_unitario": 600
+            },
+            {
+                "nombre": "brocoli",
+                "cantidad": 3 ,
+                "precio_unitario": 33
+            }
+        ],
+        [
+            {
+                "nombre": "pan",
+                "cantidad": 4 ,
+                "precio_unitario": 800
+            },
+            {
+                "nombre": "aguacate",
+                "cantidad": 2 ,
+                "precio_unitario": 5000
+            }
+        ],
+        [
+            {
+                "nombre": "cafe",
+                "cantidad": 3 ,
+                "precio_unitario": 600
+            },
+            {
+                "nombre": "leche",
+                "cantidad": 1 ,
+                "precio_unitario": 500
+            }
+        ],
+        [
+            {
+                "nombre": "cafe",
+                "cantidad": 3 ,
+                "precio_unitario": 600
+            },
+            {
+                "nombre": "banano",
+                "cantidad": 10 ,
+                "precio_unitario": 50
+            }
+        ],
+        [
+            {
+                "nombre": "cafe",
+                "cantidad": 1 ,
+                "precio_unitario": 600
+            }
+        ],
+        [
+            {
+                "nombre": "cerveza",
+                "cantidad": 5 ,
+                "precio_unitario": 500
+            }
+        ],
+        [
+            {
+                "nombre": "aguacate",
+                "cantidad": 1 ,
+                "precio_unitario": 5000
+            },
+            {
+                "nombre": "agua",
+                "cantidad": 1 ,
+                "precio_unitario": 600
+            },
+            {
+                "nombre": "pan",
+                "cantidad": 1 ,
+                "precio_unitario": 800
+            }
+        ],
+        [
+            {
+                "nombre": "cafe",
+                "cantidad": 3 ,
+                "precio_unitario": 600
+            },
+            {
+                "nombre": "leche",
+                "cantidad": 3 ,
+                "precio_unitario": 500
+            }
+        ],
+        [
+            {
+                "nombre": "agua",
+                "cantidad": 1 ,
+                "precio_unitario": 600
+            },
+            {
+                "nombre": "banano",
+                "cantidad": 25 ,
+                "precio_unitario": 50
+            }
+        ],
+        [
+            {
+                "nombre": "cafe",
+                "cantidad": 4 ,
+                "precio_unitario": 600
+            }
+        ]
+    ]
+}
