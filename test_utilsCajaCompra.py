@@ -1,4 +1,5 @@
-from .utilsCajaCompra import obt_CajasTabuladas, obt_CajasTabuladasJson, guardar_Archivo, obt_TotalProducto, obt_TotalCajas
+from .utilsCajaCompra import obt_CajasTabuladas, obt_CajasTabuladasJson, guardar_Archivo, obt_TotalProducto, obt_TotalCajas, obt_Metricas
+from pyspark.sql.types import StructType,StructField, StringType
 
 
 def test_CajasTabuladas(spark_session):
@@ -73,4 +74,55 @@ def test_obtTotalProducto(spark_session):
     print('Esperado: ')
     expected_ds.show()
 
+
+    assert actual_ds.collect() == expected_ds.collect()
+
+def test_obtMetricas(spark_session):
+
+    schema = StructType([StructField('metrica', StringType(), True),StructField('valor', StringType(), True)])
+
+    expected_ds = spark_session.createDataFrame(spark_session.sparkContext.emptyRDD(),schema)
+
+    caja45 = '{"numero_caja": 45,"compras": [[{"nombre": "manzana","cantidad": 3 ,"precio_unitario": 22},{"nombre": "brocoli","cantidad": 2 ,"precio_unitario": 33}],[{"nombre": "mango","cantidad": 4 ,"precio_unitario": 90}]]}'
+    caja46 = '{"numero_caja": 46,"compras": [[{"nombre": "mani","cantidad": 2 ,"precio_unitario": 22},{"nombre": "almendras","cantidad": 2 ,"precio_unitario": 24}],[{"nombre": "pasas","cantidad": 3 ,"precio_unitario": 12}],[{"nombre": "ciruelas","cantidad": 1 ,"precio_unitario": 28}]]}'
+
+    Caja45_df = obt_CajasTabuladasJson(caja45)
+    Caja46_df = obt_CajasTabuladasJson(caja46)
+    caja_completa_df = Caja45_df.union(Caja46_df)
+
+    actual_ds = Caja45_df.union(Caja46_df)
+    total_producto_df = obt_TotalProducto(actual_ds)
+
+    total_caja_df = obt_TotalCajas(actual_ds)
+
+    actual_ds = obt_Metricas(total_producto_df, total_caja_df, caja_completa_df)
+    
+    ## Definicion de datos esperados. 
+
+
+    expected_0_ds = spark_session.createDataFrame(
+        [('caja_con_mas_ventas', 45),
+        ('caja_con_menos_ventas', 46)],
+        ['metrica', 'valor'])  
+
+    expected_1_ds = spark_session.createDataFrame(
+        [('percentil_25_por_caja', 86.0),
+        ('percentil_50_por_caja', 86.0),
+        ('percentil_75_por_caja', 86.0)],
+        ['metrica', 'valor'])  
+
+    expected_2_ds = spark_session.createDataFrame(
+        [('producto_mas_vendido_por_unidad', 'mango'),
+        ('producto_de_mayor_ingreso', 'mango')],
+        ['metrica', 'valor'])  
+    
+    expected_ds = expected_ds.union(expected_0_ds)
+    expected_ds = expected_ds.union(expected_1_ds)
+    expected_ds = expected_ds.union(expected_2_ds)
+
+
+    actual_ds.show()
+
+    expected_ds.show()
+    
     assert actual_ds.collect() == expected_ds.collect()
