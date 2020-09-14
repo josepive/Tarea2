@@ -2,6 +2,7 @@
 ## Jose Piedra Venegas
 
 Se crean 5 archivos .json: Caja_21, Caja22, Caja23, Caja24, Caja25
+Estos archivos tienen al menos 10 compras de 1 o varios productos cada una.
 
 1. Construir imagen de Docker (tarea2_jpiedra)
 
@@ -21,8 +22,9 @@ sh run_image.sh
 sh run_utilsCajaCompra.sh
 
 ```
-Debe generar: metricas.csv, totalcajas.csv, totalproductos.csv
+Se generan 3 carpetas: metricas, totalcajas, totalproductos
 
+Se generan en la carpeta principal: metricas.csv, totalcajas.csv, totalproductos.csv
 
 
 4. Las pruebas se ejecutan con
