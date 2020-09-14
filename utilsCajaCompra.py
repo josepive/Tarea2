@@ -98,7 +98,7 @@ def obt_Metricas(total_productos, total_cajas, CajaTotal_df):
     # Calculo de Percentiles
 
     percentiles_por_caja = total_cajas.sort('total_vendido', ascending=True).approxQuantile(
-        'total_vendido', probabilities=[0.25, 0.5, 0.75], relativeError=1)
+        'total_vendido', probabilities=[0.25, 0.5, 0.75], relativeError=0)
 
     percentil_25_por_caja = percentiles_por_caja[0]
 
